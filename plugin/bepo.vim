@@ -33,3 +33,13 @@ call s:amap(   'C',  'H'     )    "{HJKL} devient [CTSR]
 call s:amap(   'T',  'J'     )    "{HJKL} devient [CTSR]
 call s:amap(   'S',  'K'     )    "{HJKL} devient [CTSR]
 call s:amap(   'R',  'L'     )    "{HJKL} devient [CTSR]
+
+call s:amap(   'l',  'c'     )    "{c} devient [l]
+call s:amap(   'L',  'C'     )    "{C} devient [L]
+call s:amap(   'j',  'r'     )    "{j} devient [r]
+call s:amap(   'J',  'R'     )    "{J} devient [R]
+
+call s:amap(   'k',  's'     )    "{k} devient [s]
+call s:amap(   'K',  'S'     )    "{h} devient [S]
+call s:amap(   'gb', 'gT'    )    "le couple [gb]/[gé] agit sur les tabs
+call s:amap(   'gé', 'gt'    )    "le couple [gb]/[gé] agit sur les tabs
