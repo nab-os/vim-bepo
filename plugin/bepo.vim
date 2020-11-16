@@ -25,33 +25,71 @@ function! s:amap(key, target) abort
   call s:tomap(a:key, a:target)
 endfunction
 
-call s:amap(   'c',  'h'     )    "on préserve {hjkl} pour les directions
-call s:amap(   't',  'j'     )    "on préserve {hjkl} pour les directions
-call s:amap(   's',  'k'     )    "on préserve {hjkl} pour les directions
-call s:amap(   'r',  'l'     )    "on préserve {hjkl} pour les directions
-call s:amap(   'C',  'H'     )    "{HJKL} devient [CTSR]
-call s:amap(   'T',  'J'     )    "{HJKL} devient [CTSR]
-call s:amap(   'S',  'K'     )    "{HJKL} devient [CTSR]
-call s:amap(   'R',  'L'     )    "{HJKL} devient [CTSR]
+"s:imap is for insert mode
+function! s:inmap(key, target) abort
+  if maparg(a:key, 'i') ==# ''
+    execute "inoremap" a:key a:target
+  endif
+endfunction
 
-call s:amap(   'l',  'c'     )    "{c} devient [l]
-call s:amap(   'L',  'C'     )    "{C} devient [L]
-call s:amap(   'j',  'r'     )    "{j} devient [r]
-call s:amap(   'J',  'R'     )    "{J} devient [R]
+" ====
+" on preserve {hjkl} pour les directions
+" {hjkl} devient {rtsc}
+" {HJKL} devient {RTSC}
+call s:amap(   'c',  'h'     )
+call s:amap(   't',  'j'     )
+call s:amap(   's',  'k'     )
+call s:amap(   'r',  'l'     )
 
-call s:amap(   'k',  's'     )    "{k} devient [s]
-call s:amap(   'K',  'S'     )    "{h} devient [S]
-call s:amap(   'gb', 'gT'    )    "le couple [gb]/[gé] agit sur les tabs
-call s:amap(   'gé', 'gt'    )    "le couple [gb]/[gé] agit sur les tabs
+call s:amap(   'C',  'H'     )
+call s:amap(   'T',  'J'     )
+call s:amap(   'S',  'K'     )
+call s:amap(   'R',  'L'     )
 
-call s:amap(   'w',  '<C-w>' )    "[w] est libre pour faire <C-w>
-call s:amap(   'W',  '<C-w><C-w>') "et [w] pour faire <C-w><C-w>
-call s:amap(  'wc', '<C-w>h' )    "on map [w]+direction
-call s:amap(  'wt', '<C-w>j' )    "on map [w]+direction
-call s:amap(  'ws', '<C-w>k' )    "on map [w]+direction
-call s:amap(  'wr', '<C-w>l' )    "on map [w]+direction
-call s:amap(  'wC', '<C-w>H' )    "idem pour les majuscules
-call s:amap(  'wT', '<C-w>J' )    "idem pour les majuscules
-call s:amap(  'wS', '<C-w>K' )    "idem pour les majuscules
-call s:amap(  'wR', '<C-w>L' )    "idem pour les majuscules
-call s:amap(  'wh', '<C-w>s' )    "crée un split _h_orizontal
+" ====
+" {rtsc} devient {hjkl}
+" {RTSC} devient {HJKL}
+call s:amap(   'h',  'r'     )
+call s:amap(   'j',  't'     )
+call s:amap(   'k',  's'     )
+call s:amap(   'l',  'c'     )
+
+call s:amap(   'H',  'R'     )
+call s:amap(   'J',  'T'     )
+call s:amap(   'K',  'S'     )
+call s:amap(   'L',  'C'     )
+
+"====
+" le couple [gb]/[gé] agit sur les tabs
+call s:amap(   'gb', 'gT'    )
+call s:amap(   'gé', 'gt'    )
+
+" ====
+" [w] est libre pour faire <C-w>
+" on map [w]+direction
+call s:amap(   'w',  '<C-w>' )
+call s:amap(   'w',  '<C-w>' )
+call s:amap(   'W',  '<C-w><C-w>')
+call s:amap(  'wc', '<C-w>h' )
+call s:amap(  'wt', '<C-w>j' )
+call s:amap(  'ws', '<C-w>k' )
+call s:amap(  'wr', '<C-w>l' )
+call s:amap(  'wC', '<C-w>H' )
+call s:amap(  'wT', '<C-w>J' )
+call s:amap(  'wS', '<C-w>K' )
+call s:amap(  'wR', '<C-w>L' )
+call s:amap(  'wh', '<C-w>s' )
+
+" ====
+" Le é de bepo est disponible pour [w]
+call s:amap(  'é', 'w' )
+call s:amap(  'É', 'W' )
+call s:amap(  'aé', 'aw' )
+call s:amap(  'aÉ', 'aW' )
+call s:amap(  'ié', 'iw' )
+call s:amap(  'iÉ', 'iW' )
+
+" ====
+" saleté de guillemet-apostrophe
+call s:amap(  '’', "\'" )
+call s:inmap(  '’', "\'" )
