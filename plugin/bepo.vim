@@ -90,6 +90,11 @@ call s:amap(  'ié', 'iw' )
 call s:amap(  'iÉ', 'iW' )
 
 " ====
+" Le è est disponible pour les débuts de ligne
+call s:amap(  'è', '^' )
+call s:amap(  'è', '0' )
+
+" ====
 " saleté de guillemet-apostrophe
 call s:amap(  '’', "\'" )
 call s:inmap(  '’', "\'" )
