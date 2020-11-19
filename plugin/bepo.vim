@@ -1,5 +1,6 @@
 " vim-bepo - Plugin vim pour disposition de clavier bépo
-" Maintainer:   Micha Moskovic
+" Derived from Micha Moskovic's version
+" Maintainer: Nabos
 
 if exists('g:loaded_bepo') || &compatible
   finish
@@ -25,10 +26,17 @@ function! s:amap(key, target) abort
   call s:tomap(a:key, a:target)
 endfunction
 
-"s:imap is for insert mode
+"s:inmap is for insert mode
 function! s:inmap(key, target) abort
   if maparg(a:key, 'i') ==# ''
     execute "inoremap" a:key a:target
+  endif
+endfunction
+
+"s:clmap is for command line mode
+function! s:clmap(key, target) abort
+  if maparg(a:key, 'c') ==# ''
+    execute "cnoremap" a:key a:target
   endif
 endfunction
 
@@ -36,6 +44,7 @@ endfunction
 " on preserve {hjkl} pour les directions
 " {hjkl} devient {rtsc}
 " {HJKL} devient {RTSC}
+" on préserve les variantes avec 'z'
 call s:amap(   'c',  'h'     )
 call s:amap(   't',  'j'     )
 call s:amap(   's',  'k'     )
@@ -45,6 +54,9 @@ call s:amap(   'C',  'H'     )
 call s:amap(   'T',  'J'     )
 call s:amap(   'S',  'K'     )
 call s:amap(   'R',  'L'     )
+
+call s:amap(  'zt', 'zj'     )
+call s:amap(  'zs', 'zk'     )
 
 " ====
 " {rtsc} devient {hjkl}
@@ -98,3 +110,4 @@ call s:amap(  'È', '0' )
 " saleté de guillemet-apostrophe
 call s:amap(  '’', "\'" )
 call s:inmap(  '’', "\'" )
+call s:clmap(  '’', "\'" )
